@@ -1,24 +1,19 @@
-﻿using System.Windows;
-using WpfSampleDi.Service;
+﻿using WpfSampleDi.ViewModels;
 
-namespace WpfSampleDi
+namespace WpfSampleDi;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public readonly ILogBase LogBase;
+        InitializeComponent();
+    }
 
-        public static MainWindow AppWindow;
-
-        public MainWindow(ILogBase logBase)
-        {
-            AppWindow = this;
-            LogBase = logBase;
-
-            InitializeComponent();
-        }
-
+    public MainWindow(MainViewModel viewModel) : this()
+    {
+        DataContext = viewModel;
     }
 }

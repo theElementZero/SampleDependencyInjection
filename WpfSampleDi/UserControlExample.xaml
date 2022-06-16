@@ -2,9 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfSampleDi"
-             mc:Ignorable="d" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:WpfSampleDi.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModels:ViewModel1}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,9 +17,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="UserSource" Grid.Column="0" />
-            <Button Grid.Column="1" x:Name="SetButton" Content="Set Address" Click="SetButton_Click" />
+            <TextBox Text="{Binding UriString, Mode=TwoWay}" Grid.Column="0" />
+            <Button Grid.Column="1" Content="Set Address" Command="{Binding SetUriCommand, Mode=OneTime}" />
         </Grid>
-        <Frame Grid.Row="1" x:Name="WebFrame" Source="http://www.bing.com" Navigated="WebFrame_Navigated" />
+        <Frame Grid.Row="1" Source="{Binding ActualUri, Mode=OneWay}" />
     </Grid>
 </UserControl>

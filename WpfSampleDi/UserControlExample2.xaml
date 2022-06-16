@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfSampleDi"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBox x:Name = "TextBox1" HorizontalAlignment = "Center" Text = "TextBox" TextWrapping = "Wrap" VerticalAlignment = "Center" Width = "780" Height = "402" />
+        <TextBox HorizontalAlignment = "Center" Text = "TextBox" TextWrapping = "Wrap" VerticalAlignment = "Center" Width = "780" Height = "402" />
     </Grid>
 </UserControl>

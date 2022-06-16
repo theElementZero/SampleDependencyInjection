@@ -1,35 +1,39 @@
-﻿using System.IO;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
-using WpfSampleDi.Service;
+using Microsoft.Extensions.Logging;
+using WpfSampleDi.ViewModels;
 
-namespace WpfSampleDi
+namespace WpfSampleDi;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    private readonly ServiceProvider _serviceProvider;
+
+    public App()
     {
-        private readonly ServiceProvider _serviceProvider;
+        var serviceCollection = new ServiceCollection();
+        
+        ConfigureServices(serviceCollection);
 
-        public App()
-        {
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
+        _serviceProvider = serviceCollection.BuildServiceProvider();
+    }
 
-            _serviceProvider = serviceCollection.BuildServiceProvider();
-        }
+    private static void ConfigureServices(IServiceCollection services)
+    {
+        services
+            .AddLogging(logging => logging.AddConsole())
+            .AddTransient<ViewModel1>()
+            .AddTransient<ViewModel2>()
+            .AddTransient<MainViewModel>()
+            .AddTransient<MainWindow>();
+    }
 
-        private void ConfigureServices(IServiceCollection services)
-        {
-            services.AddSingleton<ILogBase>(provider => new LogBase(new FileInfo(@"c:\temp\log.txt")));
-            services.AddSingleton<MainWindow>();
-        }
-
-        private void AppOnStartup(object sender, StartupEventArgs e)
-        {
-            var mainWindow = _serviceProvider.GetService<MainWindow>();
-            mainWindow?.Show();
-        }
+    private void AppOnStartup(object sender, StartupEventArgs e)
+    {
+        var mainWindow = _serviceProvider.GetService<MainWindow>();
+        mainWindow?.Show();
     }
 }
