@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfSampleDi"
+        xmlns:viewModels="clr-namespace:WpfSampleDi.ViewModels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
-        <local:UserControlExample Height="396" />
-        <local:UserControlExample2 />
+        <local:UserControlExample DataContext="{Binding ViewModel1, Mode=OneTime}" Height="396" />
+        <local:UserControlExample2 DataContext="{Binding ViewModel2, Mode=OneTime}" />
     </StackPanel>
 
 </Window>
